@@ -1,0 +1,18 @@
+.hero{
+    position: relative;
+    height: 70vh;
+    overflow: hidden;
+    margin-top:60px;
+    &-content{
+        max-width: 400px;
+        position: absolute;
+        left:100px;
+        top:50%;
+        color:rgb(115, 3, 119);
+        transform: translateY(-50%);
+    }
+}
+.hero img{
+    width:100%;
+    object-fit: cover;
+}
