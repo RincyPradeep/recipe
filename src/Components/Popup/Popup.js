@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {AllMenuContext} from '../AllMenuContext'
 import './Popup.scss';
 
-function Popup({closePopup,currentDish}) {
+function Popup({closePopup,currentDish,addToCartHandler}) {
     const allMenu=useContext(AllMenuContext)
     let dishDetails = allMenu.filter((menuItem)=>{
         return menuItem.strMeal === currentDish
@@ -26,7 +26,11 @@ function Popup({closePopup,currentDish}) {
                     {item.strIngredient3 && <li>{item.strIngredient3}</li> }
                     {item.strIngredient4 && <li>{item.strIngredient4}</li> }
                     </ul>
-                </div>                           
+                </div>  
+                <div className="popup-button">
+                    <button onClick={()=>addToCartHandler(item.strMealThumb,item.strMeal)}>Order Now</button>
+                </div>  
+                <h5 className="popup-close" onClick={closePopup}>Close</h5>                       
             </div>
         )
     })
@@ -37,10 +41,6 @@ function Popup({closePopup,currentDish}) {
         <div className="popup">
             <div className="popup-content">
                 {dishDetails}
-                <div className="popup-button">
-                    <button>Order Now</button>
-                </div>               
-                <h5 className="popup-close" onClick={closePopup}>Close</h5>
             </div>           
         </div>
     )

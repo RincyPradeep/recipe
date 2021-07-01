@@ -3,11 +3,14 @@ import CardDish from '../CardDish/CardDish';
 import Popup from '../Popup/Popup';
 import {AllMenuContext} from '../AllMenuContext';
 import './SpecialDishes.scss'
+import AddToCart from '../AddToCart/AddToCart';
 
 function SpecialDishes() {
     let [showPopup, setShowPopup] = useState(false)
     let [currentDish,setCurrentDish] = useState("");
+    let [addToCartItem,setAddToCartItem] = useState([])
     let maxSpecialDishes = 8;
+    
 
     const allMenu=useContext(AllMenuContext)
     console.log("Global:",allMenu);
@@ -36,14 +39,25 @@ function SpecialDishes() {
         }
     })
 
+    // ---------Add to cart----------
+    const addToCartHandler = (addToCartImg,addToCartTitle) =>{
+        let obj={
+            img:addToCartImg,
+            title:addToCartTitle
+        }
+        setAddToCartItem([...addToCartItem,obj])
+    }
+
 
     // ------------Rendering-----------
     return (
         <section className="special-dishes">
             {showPopup && <Popup closePopup={closePopupHandler}
                                  currentDish={currentDish}
+                                 addToCartHandler={addToCartHandler}
                                   />}
             <div className="container">
+                <AddToCart addToCartItem={addToCartItem}/>
                 <div className="special-dishes-content text-center">               
                     <h2>Our special Dishes</h2>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, aliquam ex debitis corporis, minus facere ut veritatis quia excepturi fugit dolores molestiae obcaecati est dignissimos.</p>                
